@@ -14,7 +14,8 @@ export const useMultiplayer = () => {
 
   // Initialize socket connection
   useEffect(() => {
-    const newSocket = io('http://localhost:3000', {
+    const socketUrl = import.meta.env.VITE_SOCKET_URL || import.meta.env.VITE_LOVABLE_BACKEND_URL || 'http://localhost:3000';
+    const newSocket = io(socketUrl, {
       autoConnect: false,
     });
 

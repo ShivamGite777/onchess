@@ -17,15 +17,11 @@ export const ChessBoard: React.FC<ChessBoardProps> = ({
   position,
   onMove,
   orientation = 'white',
-  showLegalMoves = true,
   selectedSquare,
-  legalMoves = [],
   isInteractive = true,
   className,
 }) => {
   const [rightClickedSquares, setRightClickedSquares] = useState<Record<string, any>>({});
-  const [moveFrom, setMoveFrom] = useState<string>('');
-  const [optionSquares, setOptionSquares] = useState<Record<string, any>>({});
 
   const onDrop = useCallback((sourceSquare: string, targetSquare: string) => {
     if (!isInteractive) return false;
@@ -94,7 +90,7 @@ export const ChessBoard: React.FC<ChessBoardProps> = ({
             backgroundColor: '#f0d9b5',
           }}
           customPieces={{
-            wP: ({ squareWidth }) => (
+            wP: ({ squareWidth }: { squareWidth: number }) => (
               <div
                 style={{
                   width: squareWidth,
@@ -109,7 +105,7 @@ export const ChessBoard: React.FC<ChessBoardProps> = ({
                 ♙
               </div>
             ),
-            wR: ({ squareWidth }) => (
+            wR: ({ squareWidth }: { squareWidth: number }) => (
               <div
                 style={{
                   width: squareWidth,
@@ -124,7 +120,7 @@ export const ChessBoard: React.FC<ChessBoardProps> = ({
                 ♖
               </div>
             ),
-            wN: ({ squareWidth }) => (
+            wN: ({ squareWidth }: { squareWidth: number }) => (
               <div
                 style={{
                   width: squareWidth,
@@ -139,7 +135,7 @@ export const ChessBoard: React.FC<ChessBoardProps> = ({
                 ♘
               </div>
             ),
-            wB: ({ squareWidth }) => (
+            wB: ({ squareWidth }: { squareWidth: number }) => (
               <div
                 style={{
                   width: squareWidth,
@@ -154,7 +150,7 @@ export const ChessBoard: React.FC<ChessBoardProps> = ({
                 ♗
               </div>
             ),
-            wQ: ({ squareWidth }) => (
+            wQ: ({ squareWidth }: { squareWidth: number }) => (
               <div
                 style={{
                   width: squareWidth,
@@ -169,7 +165,7 @@ export const ChessBoard: React.FC<ChessBoardProps> = ({
                 ♕
               </div>
             ),
-            wK: ({ squareWidth }) => (
+            wK: ({ squareWidth }: { squareWidth: number }) => (
               <div
                 style={{
                   width: squareWidth,
@@ -184,7 +180,7 @@ export const ChessBoard: React.FC<ChessBoardProps> = ({
                 ♔
               </div>
             ),
-            bP: ({ squareWidth }) => (
+            bP: ({ squareWidth }: { squareWidth: number }) => (
               <div
                 style={{
                   width: squareWidth,
@@ -199,7 +195,7 @@ export const ChessBoard: React.FC<ChessBoardProps> = ({
                 ♟
               </div>
             ),
-            bR: ({ squareWidth }) => (
+            bR: ({ squareWidth }: { squareWidth: number }) => (
               <div
                 style={{
                   width: squareWidth,
@@ -214,7 +210,7 @@ export const ChessBoard: React.FC<ChessBoardProps> = ({
                 ♜
               </div>
             ),
-            bN: ({ squareWidth }) => (
+            bN: ({ squareWidth }: { squareWidth: number }) => (
               <div
                 style={{
                   width: squareWidth,
@@ -229,7 +225,7 @@ export const ChessBoard: React.FC<ChessBoardProps> = ({
                 ♞
               </div>
             ),
-            bB: ({ squareWidth }) => (
+            bB: ({ squareWidth }: { squareWidth: number }) => (
               <div
                 style={{
                   width: squareWidth,
@@ -244,7 +240,7 @@ export const ChessBoard: React.FC<ChessBoardProps> = ({
                 ♝
               </div>
             ),
-            bQ: ({ squareWidth }) => (
+            bQ: ({ squareWidth }: { squareWidth: number }) => (
               <div
                 style={{
                   width: squareWidth,
@@ -259,7 +255,7 @@ export const ChessBoard: React.FC<ChessBoardProps> = ({
                 ♛
               </div>
             ),
-            bK: ({ squareWidth }) => (
+            bK: ({ squareWidth }: { squareWidth: number }) => (
               <div
                 style={{
                   width: squareWidth,

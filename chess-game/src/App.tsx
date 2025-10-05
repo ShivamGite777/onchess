@@ -12,8 +12,7 @@ import { MoveHistory } from './components/Game/MoveHistory';
 import { CapturedPieces } from './components/Game/CapturedPieces';
 import { GameControls } from './components/Game/GameControls';
 import { GameResultModal } from './components/Modals/GameResultModal';
-import { GameMode, TimeControl, AIDifficulty } from './types/chess.types';
-import { cn } from './utils/cn';
+import type { GameMode, TimeControl, AIDifficulty } from './types/chess.types';
 
 type AppState = 'home' | 'game-mode' | 'time-control' | 'game' | 'settings';
 
@@ -25,25 +24,18 @@ const App: React.FC = () => {
   const [boardOrientation, setBoardOrientation] = useState<'white' | 'black'>('white');
 
   const {
-    chess,
     gameState,
-    players,
     timer,
     capturedPieces,
-    gameStats,
     settings,
-    soundSettings,
     isGameActive,
     isPaused,
     showPromotionDialog,
-    promotionSquare,
     selectedSquare,
     legalMoves,
     gameResult,
-    handleMove,
     handleSquareClick,
     handlePromotion,
-    startNewGame,
     resetGame,
     pauseGame,
     resumeGame,
@@ -52,7 +44,6 @@ const App: React.FC = () => {
     selectSquare,
     getCurrentPlayer,
     getOpponentPlayer,
-    canMakeMove,
     initializeGame,
   } = useChessGame();
 
@@ -171,7 +162,7 @@ const App: React.FC = () => {
                 onSettings={handleSettings}
                 onFlipBoard={handleFlipBoard}
                 soundEnabled={sound.move}
-                onToggleSound={toggleSound}
+                onToggleSound={() => toggleSound('move')}
               />
             </div>
           </div>

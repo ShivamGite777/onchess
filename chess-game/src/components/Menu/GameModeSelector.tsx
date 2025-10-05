@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../UI/Card';
 import { Button } from '../UI/Button';
 import { cn } from '../../utils/cn';
-import { GameMode, AIDifficulty } from '../../types/chess.types';
+import type { GameMode } from '../../types/chess.types';
 import { Users, Bot, Globe, ArrowLeft } from 'lucide-react';
 
 interface GameModeSelectorProps {

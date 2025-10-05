@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal } from '../UI/Modal';
 import { Button } from '../UI/Button';
-import { GameResult } from '../../types/chess.types';
+import type { GameResult } from '../../types/chess.types';
 import { Trophy, Handshake, Clock, AlertCircle } from 'lucide-react';
 
 interface GameResultModalProps {

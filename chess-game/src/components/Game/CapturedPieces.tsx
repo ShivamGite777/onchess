@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn } from '../../utils/cn';
-import { CapturedPieces as CapturedPiecesType, PieceType } from '../../types/chess.types';
+import type { CapturedPieces as CapturedPiecesType, PieceType } from '../../types/chess.types';
 
 interface CapturedPiecesProps {
   capturedPieces: CapturedPiecesType;

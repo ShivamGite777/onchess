@@ -33,6 +33,7 @@ A complete, production-ready chess web application with multiplayer support, AI 
 ### Prerequisites
 - Node.js 16+ 
 - npm or yarn
+- Lovable backend (for multiplayer features)
 
 ### Installation
 
@@ -47,12 +48,18 @@ cd chess-game
 npm install
 ```
 
-3. Start the development server:
+3. Set up environment variables:
+```bash
+cp .env.example .env.local
+# Edit .env.local with your Lovable backend URL
+```
+
+4. Start the development server:
 ```bash
 npm run dev
 ```
 
-4. Open your browser and navigate to `http://localhost:5173`
+5. Open your browser and navigate to `http://localhost:5173`
 
 ### Building for Production
 
@@ -61,6 +68,22 @@ npm run build
 ```
 
 The built files will be in the `dist` directory.
+
+### Deployment to Vercel
+
+1. **Quick Deploy**: [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/your-username/chess-game)
+
+2. **Manual Deploy**:
+   - Connect your GitHub repository to Vercel
+   - Set environment variables in Vercel dashboard
+   - Deploy automatically on every push to main
+
+3. **Environment Variables** (set in Vercel):
+   - `VITE_LOVABLE_BACKEND_URL`: Your Lovable backend URL
+   - `VITE_SOCKET_URL`: Your Socket.io server URL
+   - `VITE_NODE_ENV`: `production`
+
+📖 **Detailed deployment guide**: See [DEPLOYMENT.md](./DEPLOYMENT.md)
 
 ## Project Structure
 

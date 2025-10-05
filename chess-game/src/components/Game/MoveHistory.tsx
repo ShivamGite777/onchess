@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { cn } from '../../utils/cn';
-import { Move } from '../../types/chess.types';
+import type { Move } from '../../types/chess.types';
 
 interface MoveHistoryProps {
   moves: Move[];

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal } from '../UI/Modal';
 import { Button } from '../UI/Button';
-import { cn } from '../../utils/cn';
+// import { cn } from '../../utils/cn';
 
 interface PromotionDialogProps {
   isOpen: boolean;
@@ -14,7 +14,7 @@ const PromotionDialog: React.FC<PromotionDialogProps> = ({
   isOpen,
   onClose,
   onSelect,
-  color,
+  color: _color,
 }) => {
   const pieces = [
     { symbol: '♕', value: 'q', name: 'Queen' },

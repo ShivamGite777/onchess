@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from '../../utils/cn';
 import { Crown, User } from 'lucide-react';
-import { Player } from '../../types/chess.types';
+import type { Player } from '../../types/chess.types';
 
 interface PlayerInfoProps {
   player: Player;

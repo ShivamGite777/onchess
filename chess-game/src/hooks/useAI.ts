@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { Chess } from 'chess.js';
-import { AIDifficulty, Move } from '../types/chess.types';
+import type { AIDifficulty, Move } from '../types/chess.types';
 import { makeComputerMove } from '../utils/ai.utils';
 
 export const useAI = (difficulty: AIDifficulty = 'medium') => {

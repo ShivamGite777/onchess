@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../UI/Card';
 import { Button } from '../UI/Button';
 import { cn } from '../../utils/cn';
-import { TimeControl } from '../../types/chess.types';
+import type { TimeControl } from '../../types/chess.types';
 import { Clock, ArrowLeft, Play } from 'lucide-react';
 
 interface TimeControlSelectorProps {
@@ -64,7 +64,7 @@ export const TimeControlSelector: React.FC<TimeControlSelectorProps> = ({
 
   const getTimeControlName = (timeControl: TimeControl): string => {
     const minutes = Math.floor(timeControl.timePerPlayer / 60);
-    const increment = timeControl.increment || 0;
+    const _increment = timeControl.increment || 0;
     
     if (minutes <= 5) return 'Blitz';
     if (minutes <= 15) return 'Rapid';
