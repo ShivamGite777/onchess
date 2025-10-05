@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { useChessGame } from './hooks/useChessGame';
 import { useSound } from './hooks/useSound';
-import { HomeScreen } from './components/Menu/HomeScreen';
 import { GameModeSelector } from './components/Menu/GameModeSelector';
 import { TimeControlSelector } from './components/Menu/TimeControlSelector';
-import { ChessBoard } from './components/Board/ChessBoard';
 import { PromotionDialog } from './components/Board/PromotionDialog';
 import { Timer } from './components/Game/Timer';
 import { PlayerInfo } from './components/Game/PlayerInfo';
@@ -21,7 +19,6 @@ const App: React.FC = () => {
   const [selectedGameMode, setSelectedGameMode] = useState<GameMode | null>(null);
   const [selectedTimeControl, setSelectedTimeControl] = useState<TimeControl | null>(null);
   const [selectedDifficulty] = useState<AIDifficulty>('medium');
-  const [boardOrientation, setBoardOrientation] = useState<'white' | 'black'>('white');
 
   const {
     gameState,
@@ -30,16 +27,13 @@ const App: React.FC = () => {
     isGameActive,
     isPaused,
     showPromotionDialog,
-    selectedSquare,
     gameResult,
-    handleSquareClick,
     handlePromotion,
     resetGame,
     pauseGame,
     resumeGame,
     resign,
     offerDraw,
-    selectSquare,
     getCurrentPlayer,
     getOpponentPlayer,
     initializeGame,
@@ -93,7 +87,7 @@ const App: React.FC = () => {
   };
 
   const handleFlipBoard = () => {
-    setBoardOrientation(prev => prev === 'white' ? 'black' : 'white');
+    console.log('Flip board clicked');
   };
 
   const handleSettings = () => {
@@ -117,12 +111,36 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-bg-primary text-white">
       {appState === 'home' && (
-        <HomeScreen
-          onStartLocalGame={handleStartLocalGame}
-          onStartComputerGame={handleStartComputerGame}
-          onStartOnlineGame={handleStartOnlineGame}
-          onSettings={handleSettings}
-        />
+        <div className="min-h-screen bg-bg-primary flex items-center justify-center p-4">
+          <div className="text-center">
+            <h1 className="text-6xl font-bold text-white mb-4">
+              Chess Game
+            </h1>
+            <p className="text-xl text-gray-400 mb-8">
+              Welcome to the chess game!
+            </p>
+            <div className="space-y-4">
+              <button 
+                onClick={handleStartLocalGame}
+                className="block w-full bg-highlight text-white px-6 py-3 rounded-lg hover:bg-highlight/90"
+              >
+                Start Local Game
+              </button>
+              <button 
+                onClick={handleStartComputerGame}
+                className="block w-full bg-success text-white px-6 py-3 rounded-lg hover:bg-success/90"
+              >
+                Play vs Computer
+              </button>
+              <button 
+                onClick={handleStartOnlineGame}
+                className="block w-full bg-accent text-white px-6 py-3 rounded-lg hover:bg-accent/90"
+              >
+                Play Online
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
       {appState === 'game-mode' && (
@@ -210,13 +228,18 @@ const App: React.FC = () => {
 
               {/* Center - Chess Board */}
               <div className="lg:col-span-2 flex justify-center">
-                <ChessBoard
-                  position={gameState.position}
-                  onMove={handleSquareClick}
-                  orientation={boardOrientation}
-                  selectedSquare={selectedSquare}
-                  isInteractive={isGameActive && !isPaused}
-                />
+                <div className="w-full max-w-2xl mx-auto p-8 bg-bg-secondary rounded-lg">
+                  <h2 className="text-2xl font-bold text-white text-center mb-4">Chess Board</h2>
+                  <p className="text-gray-400 text-center">Chess board will be here</p>
+                  <div className="mt-4 text-center">
+                    <button 
+                      onClick={() => console.log('Test button clicked')}
+                      className="bg-highlight text-white px-4 py-2 rounded"
+                    >
+                      Test Button
+                    </button>
+                  </div>
+                </div>
               </div>
 
               {/* Right Sidebar - Move History */}
@@ -231,7 +254,7 @@ const App: React.FC = () => {
       {/* Promotion Dialog */}
       <PromotionDialog
         isOpen={showPromotionDialog}
-        onClose={() => selectSquare(null)}
+        onClose={() => console.log('Close promotion')}
         onSelect={handlePromotion}
         color={gameState.turn}
       />
