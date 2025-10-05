@@ -6,15 +6,13 @@ interface ChessBoardProps {
   position: string;
   onMove: (square: string) => void;
   orientation?: 'white' | 'black';
-  showLegalMoves?: boolean;
   selectedSquare?: string | null;
-  legalMoves?: string[];
   isInteractive?: boolean;
   className?: string;
 }
 
 export const ChessBoard: React.FC<ChessBoardProps> = ({
-  position,
+  position: _position,
   onMove,
   orientation = 'white',
   selectedSquare,
@@ -23,13 +21,13 @@ export const ChessBoard: React.FC<ChessBoardProps> = ({
 }) => {
   const [rightClickedSquares, setRightClickedSquares] = useState<Record<string, any>>({});
 
-  const onDrop = useCallback((sourceSquare: string, targetSquare: string) => {
-    if (!isInteractive) return false;
+  // const onDrop = useCallback((_sourceSquare: string, _targetSquare: string) => {
+  //   if (!isInteractive) return false;
     
-    // For drag and drop, we need to handle the move differently
-    // This will be handled by the parent component
-    return false;
-  }, [isInteractive]);
+  //   // For drag and drop, we need to handle the move differently
+  //   // This will be handled by the parent component
+  //   return false;
+  // }, [isInteractive]);
 
   const onSquareClick = useCallback((square: string) => {
     if (!isInteractive) return;
@@ -50,7 +48,6 @@ export const ChessBoard: React.FC<ChessBoardProps> = ({
 
   const getSquareStyles = useCallback(() => {
     const styles: Record<string, any> = {
-      ...optionSquares,
       ...rightClickedSquares,
     };
 
@@ -63,16 +60,12 @@ export const ChessBoard: React.FC<ChessBoardProps> = ({
     }
 
     return styles;
-  }, [optionSquares, rightClickedSquares, selectedSquare]);
+  }, [rightClickedSquares, selectedSquare]);
 
   return (
     <div className={cn('w-full max-w-2xl mx-auto', className)}>
       <div className="relative">
         <Chessboard
-          position={position}
-          onPieceDrop={onDrop}
-          onSquareClick={onSquareClick}
-          onSquareRightClick={onSquareRightClick}
           boardOrientation={orientation}
           customSquareStyles={getSquareStyles()}
           boardWidth={600}

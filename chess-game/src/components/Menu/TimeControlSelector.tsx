@@ -64,7 +64,7 @@ export const TimeControlSelector: React.FC<TimeControlSelectorProps> = ({
 
   const getTimeControlName = (timeControl: TimeControl): string => {
     const minutes = Math.floor(timeControl.timePerPlayer / 60);
-    const _increment = timeControl.increment || 0;
+    // const _increment = timeControl.increment || 0;
     
     if (minutes <= 5) return 'Blitz';
     if (minutes <= 15) return 'Rapid';

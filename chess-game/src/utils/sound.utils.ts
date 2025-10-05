@@ -1,4 +1,4 @@
-import { SoundSettings } from '../types/chess.types';
+import type { SoundSettings } from '../types/chess.types';
 
 class SoundManager {
   private audioContext: AudioContext | null = null;

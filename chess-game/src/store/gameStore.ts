@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { Chess } from 'chess.js';
-import { 
+import type { 
   GameState, 
   GameSettings, 
   Player, 
@@ -165,7 +165,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
 
   makeMove: (from: string, to: string, promotion?: string) => {
-    const { chess, gameState, timer, gameStats } = get();
+    const { chess, gameState, gameStats } = get();
     
     try {
       const move = chess.move({ from, to, promotion: promotion || 'q' });
@@ -184,9 +184,9 @@ export const useGameStore = create<GameStore>((set, get) => ({
       const newCapturedPieces = { ...gameStats.captures };
       if (move.captured) {
         if (move.color === 'w') {
-          newCapturedPieces.black.push(move.captured);
+          newCapturedPieces.black.push(move.captured as any);
         } else {
-          newCapturedPieces.white.push(move.captured);
+          newCapturedPieces.white.push(move.captured as any);
         }
       }
 
@@ -244,14 +244,14 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
 
   selectSquare: (square: string | null) => {
-    const { chess, gameState } = get();
+    const { chess } = get();
     
     if (!square) {
       set({ selectedSquare: null, legalMoves: [] });
       return;
     }
 
-    const legalMoves = chess.moves({ square, verbose: true }).map(move => move.to);
+    const legalMoves = chess.moves({ square: square as any, verbose: true }).map(move => move.to as string);
     
     set({
       selectedSquare: square,
@@ -296,7 +296,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
 
   updateTimer: (deltaTime: number) => {
-    const { timer, gameState } = get();
+    const { timer } = get();
     if (!timer.isRunning || !timer.activePlayer) return;
 
     const newTime = timer.activePlayer === 'w' 
@@ -324,7 +324,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   },
 
   switchTurn: () => {
-    const { timer, gameState } = get();
+    const { gameState } = get();
     const newActivePlayer = gameState.turn;
     
     set(state => ({

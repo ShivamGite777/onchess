@@ -1,4 +1,4 @@
-import { Square, PieceColor, GameMode, AIDifficulty, TimeControl } from '../types/chess.types';
+import type { Square, PieceColor, GameMode, AIDifficulty, TimeControl } from '../types/chess.types';
 
 export const isValidSquare = (square: string): square is Square => {
   if (typeof square !== 'string' || square.length !== 2) return false;

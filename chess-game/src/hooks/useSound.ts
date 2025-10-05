@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react';
 import { useGameStore } from '../store/gameStore';
 import { soundManager, playSound } from '../utils/sound.utils';
-import { SoundSettings } from '../types/chess.types';
+import type { SoundSettings } from '../types/chess.types';
 
 export const useSound = () => {
   const { soundSettings, updateSoundSettings } = useGameStore();

@@ -1,5 +1,5 @@
 import { Chess } from 'chess.js';
-import { AIDifficulty, Move } from '../types/chess.types';
+import type { AIDifficulty, Move } from '../types/chess.types';
 
 export const makeComputerMove = (chess: Chess, difficulty: AIDifficulty): Move | null => {
   const moves = chess.moves({ verbose: true });
@@ -17,7 +17,7 @@ export const makeComputerMove = (chess: Chess, difficulty: AIDifficulty): Move |
   }
 };
 
-const makeRandomMove = (chess: Chess, moves: Move[]): Move => {
+const makeRandomMove = (_chess: Chess, moves: Move[]): Move => {
   const randomIndex = Math.floor(Math.random() * moves.length);
   return moves[randomIndex];
 };

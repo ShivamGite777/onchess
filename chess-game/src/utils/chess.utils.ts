@@ -1,5 +1,5 @@
 import { Chess } from 'chess.js';
-import { PieceColor, PieceType, Square, Move, GameState, CapturedPieces } from '../types/chess.types';
+import type { PieceType, Square, Move, CapturedPieces } from '../types/chess.types';
 
 export const getPieceSymbol = (piece: string): string => {
   const symbols: Record<string, string> = {
@@ -37,7 +37,7 @@ export const getSquareFromCoordinates = (x: number, y: number): Square => {
 
 export const isLegalMove = (chess: Chess, from: Square, to: Square): boolean => {
   try {
-    const moves = chess.moves({ square: from, verbose: true });
+    const moves = chess.moves({ square: from as any, verbose: true });
     return moves.some(move => move.to === to);
   } catch {
     return false;
@@ -46,8 +46,8 @@ export const isLegalMove = (chess: Chess, from: Square, to: Square): boolean => 
 
 export const getLegalMoves = (chess: Chess, square: Square): Square[] => {
   try {
-    const moves = chess.moves({ square, verbose: true });
-    return moves.map(move => move.to);
+    const moves = chess.moves({ square: square as any, verbose: true });
+    return moves.map(move => move.to as Square);
   } catch {
     return [];
   }
@@ -155,18 +155,18 @@ const minimax = (chess: Chess, depth: number, maximizing: boolean): number => {
     let maxEval = -Infinity;
     for (const move of moves) {
       chess.move(move);
-      const eval = minimax(chess, depth - 1, false);
+      const score = minimax(chess, depth - 1, false);
       chess.undo();
-      maxEval = Math.max(maxEval, eval);
+      maxEval = Math.max(maxEval, score);
     }
     return maxEval;
   } else {
     let minEval = Infinity;
     for (const move of moves) {
       chess.move(move);
-      const eval = minimax(chess, depth - 1, true);
+      const score = minimax(chess, depth - 1, true);
       chess.undo();
-      minEval = Math.min(minEval, eval);
+      minEval = Math.min(minEval, score);
     }
     return minEval;
   }

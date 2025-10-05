@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { io, Socket } from 'socket.io-client';
-import { Room, MultiplayerMove, GameResult, Player, SocketEvents } from '../types/chess.types';
+import type { Room, MultiplayerMove, GameResult, Player } from '../types/chess.types';
 import { generateRoomCode, validateRoomCode } from '../utils/chess.utils';
 
 export const useMultiplayer = () => {

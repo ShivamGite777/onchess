@@ -20,19 +20,17 @@ const App: React.FC = () => {
   const [appState, setAppState] = useState<AppState>('home');
   const [selectedGameMode, setSelectedGameMode] = useState<GameMode | null>(null);
   const [selectedTimeControl, setSelectedTimeControl] = useState<TimeControl | null>(null);
-  const [selectedDifficulty, setSelectedDifficulty] = useState<AIDifficulty>('medium');
+  const [selectedDifficulty] = useState<AIDifficulty>('medium');
   const [boardOrientation, setBoardOrientation] = useState<'white' | 'black'>('white');
 
   const {
     gameState,
     timer,
     capturedPieces,
-    settings,
     isGameActive,
     isPaused,
     showPromotionDialog,
     selectedSquare,
-    legalMoves,
     gameResult,
     handleSquareClick,
     handlePromotion,
@@ -216,9 +214,7 @@ const App: React.FC = () => {
                   position={gameState.position}
                   onMove={handleSquareClick}
                   orientation={boardOrientation}
-                  showLegalMoves={settings.showLegalMoves}
                   selectedSquare={selectedSquare}
-                  legalMoves={legalMoves}
                   isInteractive={isGameActive && !isPaused}
                 />
               </div>

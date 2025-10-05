@@ -2,6 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { useGameStore } from '../store/gameStore';
 import { playSound } from '../utils/sound.utils';
 import { makeComputerMove } from '../utils/ai.utils';
+import type { GameResult } from '../types/chess.types';
 
 export const useChessGame = () => {
   const {
@@ -27,9 +28,7 @@ export const useChessGame = () => {
     resumeGame,
     endGame,
     startTimer,
-    stopTimer,
     updateTimer,
-    switchTurn,
     setShowPromotionDialog,
     setGameActive,
     initializeGame,
@@ -79,8 +78,9 @@ export const useChessGame = () => {
       }
       
       // Check for special moves
-      const move = chess.history({ verbose: true }).slice(-1)[0];
-      if (move?.captured && soundSettings.capture) {
+      const moves = chess.history({ verbose: true });
+      const lastMove = moves[moves.length - 1];
+      if (lastMove?.captured && soundSettings.capture) {
         playSound('capture');
       }
       
@@ -142,10 +142,10 @@ export const useChessGame = () => {
   const resign = useCallback(() => {
     if (!isGameActive || gameResult) return;
 
-    const result = {
-      result: gameState.turn === 'w' ? 'loss' : 'win' as const,
-      reason: 'resignation' as const,
-      winner: gameState.turn === 'w' ? 'b' : 'w' as const,
+    const result: GameResult = {
+      result: gameState.turn === 'w' ? 'loss' : 'win',
+      reason: 'resignation',
+      winner: gameState.turn === 'w' ? 'b' : 'w',
     };
     
     endGame(result);
@@ -154,20 +154,20 @@ export const useChessGame = () => {
   const offerDraw = useCallback(() => {
     if (!isGameActive || gameResult) return;
 
-    const result = {
-      result: 'draw' as const,
-      reason: 'draw' as const,
+    const result: GameResult = {
+      result: 'draw',
+      reason: 'draw',
     };
     
     endGame(result);
   }, [isGameActive, gameResult, endGame]);
 
   const getLegalMoves = useCallback((square: string) => {
-    return chess.moves({ square, verbose: true }).map(move => move.to);
+    return chess.moves({ square: square as any, verbose: true }).map(move => move.to as string);
   }, [chess]);
 
   const isLegalMove = useCallback((from: string, to: string) => {
-    const moves = chess.moves({ square: from, verbose: true });
+    const moves = chess.moves({ square: from as any, verbose: true });
     return moves.some(move => move.to === to);
   }, [chess]);
 
